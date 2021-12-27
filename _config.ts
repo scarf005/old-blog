@@ -11,9 +11,15 @@ import pug from "lume/plugins/pug.ts"
 // import svgo from "lume/plugins/svgo.ts"
 // import terser from "lume/plugins/terser.ts"
 
-const site = lume()
+const site = lume({
+  watcher: {
+    ignore: ['.git']
+  }
+})
 
 site
   .use(pug())
+  // .use(resolve_urls())
+  // .use(base_path())
 
 export default site
