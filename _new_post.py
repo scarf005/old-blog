@@ -1,3 +1,5 @@
+#!/bin/env python3
+
 from dataclasses import dataclass
 from datetime import datetime
 from os import system
@@ -14,7 +16,6 @@ class Data:
     description: str
     now = datetime.now()
     date = now.strftime("%Y-%m-%d")
-    time = now.strftime("%Y-%m-%d %H:%M:%S")
 
     def __post_init__(self):
         self.path = Path("posts") / self.category
@@ -45,7 +46,6 @@ class Post:
             ---
             title: {self.data.title}
             description: {self.data.description}
-            date: {self.data.time}
             tags:
             ---
             """
