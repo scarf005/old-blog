@@ -1,6 +1,6 @@
-import lume from "lume"
-import pug from "lume/plugins/pug.ts"
-import postcss from "lume/plugins/postcss.ts"
+import lume from 'lume'
+import postcss from 'lume/plugins/postcss.ts'
+import pug from 'lume/plugins/pug.ts'
 // import base_path from "lume/plugins/base_path.ts"
 // import bundler from "lume/plugins/bundler.ts"
 // import code_highlight from "lume/plugins/code_highlight.ts"
@@ -13,15 +13,14 @@ import postcss from "lume/plugins/postcss.ts"
 
 const site = lume({
   watcher: {
-    ignore: ['.git']
-  }
+    ignore: ['.git/*'],
+  },
 })
 
-site
-  .ignore("README.md")
+site.ignore('README.md')
   .use(pug())
   .use(postcss())
-  // .use(resolve_urls())
-  // .use(base_path())
+// .use(resolve_urls())
+// .use(base_path())
 
 export default site
