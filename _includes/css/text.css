@@ -1,0 +1,32 @@
+@import url("https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@400&family=Ubuntu+Mono&display=swap");
+
+body {
+  font-family: "Ubuntu Mono", "IBM Plex Sans KR", monospace;
+  color: var(--color-fg);
+  background-color: var(--color-bg);
+}
+
+h1 {
+  font-size: 2em;
+}
+
+p {
+  font-size: 1em;
+}
+
+hr {
+  border: none;
+  border-top: 4px dashed var(--color-fg);
+}
+
+a:link,
+a:visited,
+a:hover,
+a:active {
+    color: white;
+    text-decoration: none;
+}
+
+.header {
+  line-height: 0%;
+}

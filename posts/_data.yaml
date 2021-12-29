@@ -1,2 +1,2 @@
 type: posts
-# layout: layouts/main.pug
+layout: layouts/post.pug
