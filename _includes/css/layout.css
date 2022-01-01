@@ -13,3 +13,8 @@ nav > ul > li {
   display: inline;
   /* line-height: 0%; */
 }
+
+ul,
+li {
+  all: none;
+}

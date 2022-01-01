@@ -1,6 +1,9 @@
 ---
 title: "lume로 블로그 만들기 #00 - 시작하기"
 date: 2021-12-29
+tags:
+  - deno
+  - lume
 ---
 
 ## deno와 lume

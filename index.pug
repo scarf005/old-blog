@@ -7,3 +7,25 @@ extends /layouts/home.pug
 block content
   div
     p 으에에에에에에 / this is english
+
+  ul
+    - for (post of search.pages(""))
+      if (post.data.category)
+        +preview(post)
+
+mixin tags(tags)
+  div(class="div inline")
+    ul
+      for tag in tags
+        li: a(href= '/tag/' + tag.toLowerCase())
+          = tag
+
+mixin preview(post)
+  section
+    a(href=post.data.url) #{post.data.title}
+    +tags(post.data.tags)
+    p type: #{post.data.type}
+    p category: [#{post.data.category}]
+    p date: #{post.data.date}
+    p url: #{post.data.url}
+    p= post.data.content
