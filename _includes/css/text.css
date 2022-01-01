@@ -2,6 +2,11 @@
 
 /* font sizes, color, style */
 
+:root {
+  --color-fg: #80f09a;
+  --color-bg: #282c34;
+}
+
 body {
   font-family: "Ubuntu Mono", "IBM Plex Sans KR", monospace;
   color: var(--color-fg);
