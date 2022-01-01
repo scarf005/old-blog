@@ -1,11 +1,20 @@
-header
+block blog_title
   a(href='/')
     h1= site.title
 
+block content_title
+  h2= title
+  hr
+
+mixin navbar(...args)
   ul
-    each name in ['About', 'Posts']
+    each name in args
       li: a(href= '/' + name.toLowerCase())
         = name
+
+header
+  block blog_title
+  nav: +navbar('About', 'Posts')
+  block content_title
   //- - if (type === 'home')
   //-   p.header= site.description
-  hr
