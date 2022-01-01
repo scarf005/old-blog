@@ -1,6 +1,11 @@
-a(href='/')
-  h1= site.title
-  
-- if (type === 'home')
-  p.header= site.description
-hr
+header
+  a(href='/')
+    h1= site.title
+
+  ul
+    each name in ['About', 'Posts']
+      li: a(href= '/' + name.toLowerCase())
+        = name
+  //- - if (type === 'home')
+  //-   p.header= site.description
+  hr

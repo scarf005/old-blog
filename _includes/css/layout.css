@@ -1,0 +1,15 @@
+/* layouts */
+
+hr {
+  border: none;
+  border-top: 4px dashed var(--color-fg);
+}
+
+header > ul,
+header > ul > li {
+  margin: 0;
+  padding-left: 0;
+  padding-right: 0.5em;
+  display: inline;
+  /* line-height: 0%; */
+}
