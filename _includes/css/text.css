@@ -7,7 +7,10 @@
   --color-bg: #282c34;
   --color-text: #ffffff;
   --size-text: 1em;
-  --size-title: calc(var(--size-text) * 1.5);
+  --size-h1: calc(var(--size-text) * 1.25);
+  --size-h2: calc(var(--size-text) * 1.2);
+  --size-h3: calc(var(--size-text) * 1.1);
+  --size-h4: var(--size-text);
 }
 
 body {
@@ -18,7 +21,19 @@ body {
 }
 
 h1 {
-  font-size: var(--size-title);
+  font-size: var(--size-h1);
+}
+
+h2 {
+  font-size: var(--size-h2);
+}
+
+h3 {
+  font-size: var(--size-h2);
+}
+
+h4 {
+  font-size: var(--size-h2);
 }
 
 h1,
@@ -29,6 +44,7 @@ h4 {
 }
 
 #title {
+  /* font-size: var(--size-title); */
   text-decoration-color: var(--color-fg);
 }
 

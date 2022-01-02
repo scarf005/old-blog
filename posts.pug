@@ -2,10 +2,11 @@
 url: /posts/
 ---
 
+extends /layouts/main.pug
 include /templates/previews.pug
 
 block content
   ul
-    - for (post of search.pages(""))
+    for post in search.pages("", "date=desc")
       if (post.data.category)
         +preview(post)
