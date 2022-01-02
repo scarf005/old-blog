@@ -20,8 +20,8 @@ const site = lume({
 site
   .ignore('README.md')
   .use(pug())
-  .use(postcss())
   .use(code_highlight())
+  .use(postcss())
   .use(relative_urls())
 // .use(resolve_urls())
 // .use(base_path())

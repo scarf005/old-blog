@@ -1,10 +1,11 @@
-/* font sizes, color, style */
+/* font color, style */
 
 :root {
   --color-fg: #80f09a;
   --color-bg: #282c34;
   --color-text: #ffffff;
   --size-text: 1em;
+  --font-family: "Ubuntu Mono", "IBM Plex Sans KR", monospace;
   --size-h1: calc(var(--size-text) * 1.5);
   --size-h2: calc(var(--size-text) * 1.25);
   --size-h3: calc(var(--size-text) * 1.1);
@@ -12,32 +13,21 @@
 }
 
 body {
-  font-family: "Ubuntu Mono", "IBM Plex Sans KR", monospace;
+  font-family: var(--font-family);
   color: var(--color-text);
   background-color: var(--color-bg);
   font-size: var(--size-text);
-}
-
-h1 {
-  font-size: var(--size-h1);
-}
-
-h2 {
-  font-size: var(--size-h2);
-}
-
-h3 {
-  font-size: var(--size-h2);
-}
-
-h4 {
-  font-size: var(--size-h2);
 }
 
 h1,
 h2,
 h3,
 h4 {
+  color: var(--color-fg);
+}
+
+code {
+  font-family: var(--font-family);
   color: var(--color-fg);
 }
 

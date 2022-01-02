@@ -20,16 +20,14 @@ li {
 }
 
 /* @media (min-width: 1000px) { */
-/* }
-section > content {
-
+/* } */
+content {
   display: flex;
   justify-content: center;
   /* margin-left: 4vw;
-  margin-right: 4vw;
+  margin-right: 4vw; */
 }
 
-content {
+article {
   max-width: 1000px;
 }
-*/
