@@ -1,8 +1,10 @@
 title: scarf@127.0.0.1
 description: making computer beep boop beep boop since 2020
-auther:
+
+author:
   name: scarf
   email: greenscarf005@gmail.com
-  twitter: "@pig005"
-  url: "https://maribel.dev"
 
+contact:
+  github: "github.com/scarf005"
+  twitter: "twitter.com/scarf005"

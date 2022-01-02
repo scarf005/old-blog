@@ -1,0 +1,15 @@
+---
+title: about
+date: 2021-12-30
+url: /about/
+---
+
+extends /layouts/main.pug
+
+mixin links(dict)
+  for val, key in dict
+    li
+      a(href=`https://${val}`)= key
+
+block content
+  +links(site.contact)
