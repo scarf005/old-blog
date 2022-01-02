@@ -19,15 +19,19 @@ li {
   all: none;
 }
 
-/* @media (min-width: 1000px) { */
-/* } */
 content {
   display: flex;
   justify-content: center;
-  /* margin-left: 4vw;
-  margin-right: 4vw; */
 }
 
 article {
-  width: 50%;
+  width: 800px;
 }
+
+@media (min-width: 1200px) {
+  article {
+    width: 60%;
+  }
+}
+
+/* x * 0.6 = 800 */
