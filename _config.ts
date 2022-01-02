@@ -7,7 +7,7 @@ import relative_urls from 'lume/plugins/relative_urls.ts'
 import terser from 'lume/plugins/terser.ts'
 
 const site = lume({
-  location: new URL('www.maribel.dev'),
+  location: new URL('https://www.maribel.dev'),
 })
 
 site
