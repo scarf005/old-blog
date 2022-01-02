@@ -10,5 +10,4 @@ block content
 
   ul
     for post in search.pages("", "date=desc")
-      if (post.data.category)
         +preview(post)
