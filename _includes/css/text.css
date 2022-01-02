@@ -7,8 +7,8 @@
   --color-bg: #282c34;
   --color-text: #ffffff;
   --size-text: 1em;
-  --size-h1: calc(var(--size-text) * 1.25);
-  --size-h2: calc(var(--size-text) * 1.2);
+  --size-h1: calc(var(--size-text) * 1.5);
+  --size-h2: calc(var(--size-text) * 1.25);
   --size-h3: calc(var(--size-text) * 1.1);
   --size-h4: var(--size-text);
 }
