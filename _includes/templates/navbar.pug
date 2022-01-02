@@ -1,0 +1,5 @@
+mixin navbar(...args)
+  ul
+    for name in args
+      li: a(href= '/' + name.toLowerCase())
+        = name

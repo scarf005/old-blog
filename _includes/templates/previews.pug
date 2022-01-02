@@ -1,0 +1,15 @@
+mixin tags(tags)
+  div(class="div inline")
+    ul
+      for tag in tags
+        li: a(class= 'tag', href= '/tag/' + tag.toLowerCase())
+          = tag
+
+mixin preview(post)
+  section
+    a(href=post.data.url) #{post.data.title}
+    //- +tags(post.data.tags)
+    //- p type: #{post.data.type}
+    //- p category: [#{post.data.category}]
+    //- p date: #{post.data.date}
+    //- p= post.data.content

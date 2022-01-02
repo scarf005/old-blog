@@ -1,16 +1,11 @@
 ---
-type: home
+url: /posts/
 ---
 
-//- extends /layouts/home.pug
 include /templates/previews.pug
 
 block content
-  p= site.description
-
   ul
     - for (post of search.pages(""))
       if (post.data.category)
         +preview(post)
-
-

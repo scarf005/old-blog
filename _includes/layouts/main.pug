@@ -7,6 +7,9 @@ head
   link(rel='stylesheet', href='/main.css', type='text/css')
 
 body
-  include /layouts/header.pug
-  block content
-  block footer
+  header
+    include /templates/header.pug
+  section
+    block content
+  footer
+    block footer
