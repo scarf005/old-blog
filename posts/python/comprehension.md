@@ -1,6 +1,5 @@
 ---
 title: comprehension 표현식 써보기
-date: 2022-01-02
 ---
 
 

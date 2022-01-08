@@ -1,6 +1,5 @@
 ---
 title: aiohttp로 파이썬에서 비동기 프로그래밍 하기
-date: 2021-12-31
 tag:
     - async
     - python
