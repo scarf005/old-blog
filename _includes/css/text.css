@@ -12,7 +12,8 @@
   --size-h4: var(--size-text);
 }
 
-body, p {
+body,
+p {
   font-family: var(--font-family);
   color: var(--color-text);
   background-color: var(--color-bg);
