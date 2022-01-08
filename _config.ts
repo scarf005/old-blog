@@ -19,7 +19,6 @@ site
   .use(relative_urls())
   .use(terser())
 // .copy("img");
-// .use(resolve_urls())
 // .use(base_path())
 
 export default site

@@ -12,8 +12,8 @@ const a = 3, b = 4
 console.log(myFunc(a, b))
 console.log(myArrowFunc(a, b))
 
-<- 7
-<- 7
+> 7
+> 7
 ```
 
 ## 어떻게 쓰지
@@ -28,12 +28,12 @@ console.log(myArrowFunc(a, b))
 const noArg = () => 3
 
 noArg()
-<- 3
+> 3
 
 const oneLine = () => console.log("한 줄이면 괄호 필요 없음")
 
 oneLine()
-<- 한 줄이면 괄호 필요 없음
+> 한 줄이면 괄호 필요 없음
 ```
 
 ### 인자 1개
@@ -41,7 +41,7 @@ oneLine()
 const oneArg = num => num * 4
 
 oneArg(10)
-<- 40
+> 40
 ```
 
 ### 인자 n개
@@ -50,7 +50,7 @@ oneArg(10)
 const manyArg = (a, b) => a + b
 
 manyArg(3, 4)
-<- 7
+> 7
 ```
 
 ### 여러 줄 함수
@@ -62,9 +62,9 @@ const manyLine = (a, b) => {
 }
 
 manyLine(3, 4)
-<- 첫째 인수는 3
-<- 둘째 인수는 4
-<- '이거는 반환값'
+> 첫째 인수는 3
+> 둘째 인수는 4
+> '이거는 반환값'
 ```
 
 ## 화살표 함수와 this
@@ -85,7 +85,7 @@ const arr = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
 arr
   .filter(e => e % 2 === 0)
   .map(e => e ** 2)
-<- (5) [0, 4, 16, 36, 64]
+> (5) [0, 4, 16, 36, 64]
 ```
 
 ```js
@@ -93,7 +93,7 @@ const arr = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
 arr
   .filter(function(e) {return e % 2 === 0 })
   .map(function(e) { return e ** 2 })
-<-(5) [0, 4, 16, 36, 64]
+>(5) [0, 4, 16, 36, 64]
 ```
 
 - 쓸 수 있는 경우에 많이 쓰자
@@ -109,38 +109,38 @@ class Person {
   }
 
   hi() {
-    console.log(`hi, i'm ${this.name}`)
+    console.log(`안녕, 나는 ${this.name}`)
   }
 
   hiDelayed() {
     setTimeout(function() {
-      console.log(`hi, i'm ${this.name}`), 1000
+      console.log(`안녕, 나는 ${this.name}`), 1000
     })
   }
 
   hiDelayedTradFix() {
     const that = this
     setTimeout(function() {
-      console.log(`hi, i'm ${that.name}`), 1000
+      console.log(`안녕, 나는 ${that.name}`), 1000
     })
   }
 
   hiDelayedArrow() {
     setTimeout(() => {
-      console.log(`hi, i'm ${this.name}`), 1000
+      console.log(`안녕, 나는 ${this.name}`), 1000
     })
   }
 }
 
-mary = new Person('mary')
+mary = new Person('메리')
 mary.hi()
-<- hi, i'm mary
+> 안녕, 나는 메리
 mary.hiDelayed()
-<- hi, i'm
+> 안녕, 나는
 mary.hiDelayedTradFix()
-<- hi, i'm mary
+> 안녕, 나는 메리
 mary.hiDelayedArrow()
-<- hi, i'm mary
+> 안녕, 나는 메리
 ```
 
 ## 언제 쓰지 말까
@@ -161,11 +161,11 @@ const obj = {
 }
 
 obj.a()
-<- undefined
-<- Window {0: global, window: Window, self: Window, document: document, name: '', location: Location, …}
+> undefined
+> Window {0: global, window: Window, self: Window, document: document, name: '', location: Location, …}
 
 obj.b()
-<- 10
-<- {i: 10, a: ƒ, b: ƒ}
+> 10
+> {i: 10, a: ƒ, b: ƒ}
 ```
 -->
