@@ -57,7 +57,8 @@ let x = 1
 ### Temporal Dead Zone (TDZ)
 
 - `let`과 `var`도 **호이스팅 대상**
-- 스코프 내부에
+- 하지만 값이 `var`과 달리 `undefined`로 초기화되지 않으므로 `TDZ` 상태에 놓이게 됨
+- 아직 값이 초기화되지 않으므로 참조시 [ReferenceError](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/ReferenceError) 발생
 - [mdn 레퍼런스](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/let#temporal_dead_zone_tdz)
 
 ### var
@@ -72,6 +73,7 @@ var var_초기화 = 1
 ```
 
 ### 익명 global (키워드 없이 선언)
+
 ```js
 global_초기화
 global_초기화 = 2
@@ -80,6 +82,7 @@ global_초기화 = 2
 ```
 
 ### let, const
+
 ```js
 let_선언
 let let_선언
