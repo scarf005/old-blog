@@ -36,4 +36,6 @@ article {
   }
 }
 
-/* x * 0.6 = 800 */
+#title {
+  text-decoration-color: var(--color-fg);
+}

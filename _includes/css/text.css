@@ -32,10 +32,6 @@ code {
   color: var(--color-fg);
 }
 
-#title {
-  text-decoration-color: var(--color-fg);
-}
-
 a:link,
 a:visited,
 a:active {
@@ -48,4 +44,14 @@ a:hover {
   color: var(--color-bg);
   text-decoration: none;
   background-color: var(--color-fg);
+}
+
+h1 > a:link, h1 > a:visited {
+  color: var(--color-fg);
+  text-decoration: none;
+}
+
+h1 > a:hover {
+  background-color: var(--color-bg);
+  text-decoration: underline;
 }
