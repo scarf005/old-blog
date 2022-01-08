@@ -11,6 +11,7 @@ const site = lume({
 })
 
 site
+  .copy('CNAME')
   .ignore('README.md')
   .use(pug())
   .use(date())
