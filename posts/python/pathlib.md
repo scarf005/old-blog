@@ -4,11 +4,12 @@ title: pathlib 쓰는 법
 
 ## pathlib이란
 
-- 경로를 `객체`처럼 다룰 수 있다
+- 경로를 `객체`로 다룰 수 있다
+- [공식 문서](https://docs.python.org/ko/3/library/pathlib.html)
 
 ## 경로 다루기
 
-```py
+```python
 from pathlib import path
 
 >>> from pathlib import Path
@@ -28,7 +29,7 @@ PosixPath('디렉토리/파일.txt')
 
 ## `Path()` 객체에서 찾기
 
-```py
+```python
 >>> p.name
 '파일.txt'
 >>> p.parent
@@ -38,7 +39,7 @@ PosixPath('디렉토리')
 ```
 
 ## 디렉토리에서 찾기
-```py
+```python
 ❯ tree .
 .
 ├── dir1
@@ -68,3 +69,9 @@ dir1
 e.txt
 dir3
 ```
+
+## mv 쓰기
+```python
+>>> start = Path('somedir/a.txt')
+>>> to = Path('./b.txt')
+>>> start.rename(to)
