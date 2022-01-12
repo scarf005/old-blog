@@ -58,10 +58,6 @@ typedef struct s_data {
 	int a;
 } data;
 
-void init_pthread(pthread_t *thread, routine func, void *arg) {
-	pthread_create(thread, NULL, func, arg);
-}
-
 void *thread_func(void *arg)
 {
 	const data *val = arg;
@@ -77,7 +73,7 @@ void *thread_func(void *arg)
 int main(void) {
 	pthread_t thread;
 
-	init_pthread(&thread, thread_func, &((data){123}));
+	pthread_create(&thread, NULL, thread_func, &((data){123}));
 	return 0;
 }
 /* 출력 없이 종료 */
@@ -89,7 +85,7 @@ int main(void) {
 int main(void) {
 	pthread_t thread;
 
-	init_pthread(&thread, thread_func, &((data){123}));
+	pthread_create(&thread, NULL, thread_func, &((data){123}));
 	printf("[main] 기다리는 중\n");
 	while (true) {};
 	return 0;

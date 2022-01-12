@@ -33,4 +33,4 @@ title: 냉혹한 philosopher의 세계
 ## 목차
 
 - [pthread가 뭔지 몰?루](thread.md)
-<!-- - [mutex가 뭔지 몰?루](mutex.md) -->
+- [mutex가 뭔지 몰?루](mutex.md)
