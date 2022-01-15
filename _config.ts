@@ -6,6 +6,8 @@ import pug from 'lume/plugins/pug.ts'
 import relative_urls from 'lume/plugins/relative_urls.ts'
 import terser from 'lume/plugins/terser.ts'
 
+Deno.env.set('TZ', 'Z') // temporary solution to the date bug
+
 const site = lume({
   location: new URL('https://www.maribel.dev'),
 })
