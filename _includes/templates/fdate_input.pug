@@ -1,0 +1,13 @@
+-
+  var dateArr = `${raw_date}`.split(' ').slice(0, 5)
+
+  var dayOfWeek = dateArr[0]
+  var monthi = 'Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec'
+    .split('|')
+    .findIndex(m => m === dateArr[1]) + 1
+  var month = String(monthi).padStart(2, '0')
+  var year, day, time
+  [day, year, time] = dateArr.slice(2, 5)
+
+  var fdate = `${year}/${month}/${day}`
+  var fdate_long = `${fdate} ${time} ${dayOfWeek}`

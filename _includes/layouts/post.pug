@@ -1,10 +1,12 @@
 extends /layouts/main.pug
 
 block content
+  include /templates/fdate.pug
   content: article
     h1: a(href=`${url}`)= title
-    p= fdate
+    p= fdate_long
     br
     !=content
   hr
+
   include /templates/comments.pug

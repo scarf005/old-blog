@@ -21,20 +21,17 @@ li {
   all: none;
 }
 
-/* content {
-  display: flex;
-  justify-content: center;
-} */
-/*
-article {
-  width: 800px;
-}
+@media (min-width: 1000px) {
+  content {
+    display: flex;
+    justify-content: center;
+  }
 
-@media (min-width: 1200px) {
   article {
     width: 60%;
+    width: 800px;
   }
-} */
+}
 
 #title {
   text-decoration-color: var(--color-fg);

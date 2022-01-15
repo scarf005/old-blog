@@ -6,10 +6,7 @@ mixin tags(tags)
           = tag
 
 mixin preview(post)
+  - var raw_date = `${post.data.date}`
+  include /templates/fdate_input.pug
   section
-    a(href=post.data.url) #{post.data.title}
-    //- +tags(post.data.tags)
-    //- p type: #{post.data.type}
-    //- p category: [#{post.data.category}]
-    //- p date: #{post.data.date}
-    //- p= post.data.content
+    a(href=post.data.url) #{post.data.title} - #{fdate}

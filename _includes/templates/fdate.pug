@@ -1,12 +1,2 @@
--
-  var dateArr = `${date}`.split(' ').slice(0, 5)
-
-  var dayOfWeek = dateArr[0]
-  var month = [
-    'Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun',
-    'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'
-    ].findIndex(m => m === dateArr[1]) + 1
-  var year, day, time
-  [day, year, time] = dateArr.slice(2, 5)
-
-  var fdate = `${year}-${month}-${day} ${dayOfWeek} ${time}`
+- var raw_date = date
+include /templates/fdate_input.pug
