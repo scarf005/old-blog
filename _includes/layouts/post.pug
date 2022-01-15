@@ -3,6 +3,8 @@ extends /layouts/main.pug
 block content
   content: article
     h1: a(href=`${url}`)= title
+    p= fdate
+    br
     !=content
   hr
   include /templates/comments.pug
