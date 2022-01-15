@@ -21,11 +21,11 @@ li {
   all: none;
 }
 
-content {
+/* content {
   display: flex;
   justify-content: center;
-}
-
+} */
+/*
 article {
   width: 800px;
 }
@@ -34,7 +34,7 @@ article {
   article {
     width: 60%;
   }
-}
+} */
 
 #title {
   text-decoration-color: var(--color-fg);
