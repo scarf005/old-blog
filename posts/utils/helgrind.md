@@ -1,6 +1,7 @@
 ---
 title: helgrind와 스레드 메모리 누수 잡기
 date: 2022-01-15 12:54:57 +09:00
+draft: true
 tags:
   - c
 ---

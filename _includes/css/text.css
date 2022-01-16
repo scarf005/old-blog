@@ -13,11 +13,14 @@
 }
 
 body,
-p, a {
+p {
   font-family: var(--font-family);
   color: var(--color-text);
   background-color: var(--color-bg);
   font-size: var(--size-text);
+}
+
+a {
   height: var(--size-text);
   margin-block-end: var(--size-text);
   margin-block-start: var(--size-text);
@@ -49,7 +52,8 @@ a:hover {
   background-color: var(--color-fg);
 }
 
-h1 > a:link, h1 > a:visited {
+h1 > a:link,
+h1 > a:visited {
   color: var(--color-fg);
   text-decoration: none;
 }
