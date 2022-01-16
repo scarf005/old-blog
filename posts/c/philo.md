@@ -1,5 +1,6 @@
 ---
 title: 냉혹한 philosopher의 세계
+date: 2022-01-15 21:19:09 +09:00
 ---
 
 ## 식사하는 철학자 문제
@@ -37,8 +38,8 @@ title: 냉혹한 philosopher의 세계
 
 ## 목차
 
-- [pthread가 뭔지 몰?루](thread.md)
-- [mutex가 뭔지 몰?루](mutex.md)
+- [pthread가 뭔지 몰?루](/posts/linux/thread.md)
+- [mutex가 뭔지 몰?루](/posts/linux/mutex.md)
 
 ## 보너스 허용 함수 목록
 

@@ -1,5 +1,6 @@
 ---
 title: var vs let vs const
+date: 2022-01-15 21:23:07 +09:00
 ---
 
 ## 3줄 요약
@@ -99,4 +100,3 @@ const const_초기화 = 4
 <- Uncaught ReferenceError: const_초기화 is not defined
     at <anonymous>:1:1
 ```
-

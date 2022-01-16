@@ -1,5 +1,6 @@
 ---
 title: compound literal로 일회용 배열/구조체 만들기
+date: 2022-01-16 13:46:29 +09:00
 ---
 
 ## compound literal이란

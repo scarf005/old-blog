@@ -1,5 +1,6 @@
 ---
 title: pathlib 쓰는 법
+date: 2022-01-10 10:53:50 +09:00
 ---
 
 ## pathlib이란
