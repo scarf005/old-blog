@@ -21,17 +21,3 @@ for f in Path("posts").glob("**/*.md"):
     if "date" not in lines[2]:
         lines[2] = f"date: {get_date(f)}\n---"
         f.write_text("\n".join(lines))
-
-# print("\n".join(lines))
-# print(get_date(f))
-
-# for post in Path("posts").glob("**/*.md"):
-#     with post.opsen('r+') as f:
-#         lines = f.readlines()
-#         title = lines[0]
-#         if "date" not in title:
-#             lines[0] = title.replace("---", "---\ndate: 2020-01-01\n")
-#         else:
-#             lines[0] = title.replace("date: 2020-01-01", "date: 2020-01-01\n")
-#     with open(post, "w") as f:
-#         f.writelines(lines)

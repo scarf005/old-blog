@@ -1,17 +1,11 @@
-.tag {
+.tag,
+.tag:link {
   display: inline-block;
-  text-transform: uppercase;
-  line-height: 1;
-  padding: 0.2em 0.5em;
-  margin-right: 0.8em;
-  color: var(--color-text);
+  margin-left: 0.5em;
+  color: var(--color-bg);
   background-color: var(--color-fg);
   text-decoration: none;
 }
-
-/* .inline {
-  margin: 0;
-  padding-left: 0;
-  padding-right: 0.5em;
-  display: inline;
-} */
+.tag:hover {
+  background-color: var(--color-text);
+}
