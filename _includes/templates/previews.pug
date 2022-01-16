@@ -8,5 +8,7 @@ mixin tags(tags)
 mixin preview(post)
   - var raw_date = `${post.data.date}`
   include /templates/fdate_input.pug
+  include /templates/tags.pug
   section
     a(href=post.data.url) #{post.data.title} - #{fdate}
+    +list_tags(post.data.tags)

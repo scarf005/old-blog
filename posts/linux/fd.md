@@ -1,5 +1,5 @@
 ---
-title: 파일 식별자(file descriptor) 완벽 이해하기
+title: 파일 식별자(file descriptor)란?
 date: 2022-01-15 13:43:57 +09:00
 ---
 

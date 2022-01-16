@@ -2,6 +2,7 @@
 .tag:link {
   display: inline-block;
   margin-left: 0.5em;
+  padding: 0.1em;
   color: var(--color-bg);
   background-color: var(--color-fg);
   text-decoration: none;

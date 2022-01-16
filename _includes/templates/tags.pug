@@ -1,0 +1,4 @@
+mixin list_tags(taglst)
+  for tag in taglst
+    unless tag === "null"
+      a.tag(href=`${url}tag/${tag}`) #{tag}

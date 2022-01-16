@@ -7,5 +7,5 @@ include /templates/previews.pug
 
 block content
   ul
-    for post in search.pages("", "date=desc")
+    for post in search.pages("type=post", "date=desc")
         +preview(post)
