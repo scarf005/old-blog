@@ -3,13 +3,12 @@ extends /layouts/main.pug
 block content
   include /templates/fdate.pug
   include /templates/tags.pug
-  content
-    article
-      h1: a(href=`${url}`)= title
-      nav(style="display:flex; height: 100%")
-        p= fdate_long
-        +list_tags(tags)
-      br
-      !=content
-    hr
-    include /templates/comments.pug
+  article
+    h1: a(href=`${url}`)= title
+    nav(style="display:flex; height: 100%")
+      p= fdate_long
+      +list_tags(tags)
+    br
+    p!=content
+  hr
+  include /templates/comments.pug
