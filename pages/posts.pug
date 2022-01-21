@@ -5,7 +5,7 @@ url: /posts/
 extends /layouts/main.pug
 include /templates/previews.pug
 
-block content
+block contents
   ul
     for post in search.pages("type=post", "date=desc")
         +preview(post)

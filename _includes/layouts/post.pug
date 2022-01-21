@@ -1,14 +1,15 @@
 extends /layouts/main.pug
 
-block content
+block contents
   include /templates/fdate.pug
   include /templates/tags.pug
-  article
-    h1: a(href=`${url}`)= title
-    nav(style="display:flex; height: 100%")
-      p= fdate_long
-      +list_tags(tags)
-    br
-    p!=content
-  hr
-  include /templates/comments.pug
+  content
+    article
+      h1: a(href=`${url}`)= title
+      nav(style="display:flex; height: 100%")
+        p= fdate_long
+        +list_tags(tags)
+      br
+      p!=content
+    hr
+    include /templates/comments.pug
