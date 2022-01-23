@@ -37,7 +37,7 @@ date: 2022-01-23 21:31:31 +09:00
 ### 키워드별로 선언의 길이가 정해진 언어
 
 - 어셈블리
-```asm
+```x86asm
 ; hello-DOS.asm - single-segment, 16-bit "hello world" program
 ;
 ; assemble with "nasm -f bin -o hi.com hello-DOS.asm"
@@ -56,11 +56,6 @@ date: 2022-01-23 21:31:31 +09:00
     msg  db 'Hello, World!', 0x0d, 0x0a, '$'   ; $-terminated message
 ```
 [코드 출처](https://montcs.bloomu.edu/Information/LowLevel/Assembly/hello-asm.html)
-
-- 베이직
-```basic
-
-```
 
 - 리스프
 ```lisp
