@@ -6,6 +6,4 @@ extends /layouts/main.pug
 include /templates/previews.pug
 
 block contents
-  ul
-    for post in search.pages("type=post", "date=desc")
-        +preview(post)
+  +previewlist("type=post", "date=desc")
