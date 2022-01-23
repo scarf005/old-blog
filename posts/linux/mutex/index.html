@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html><head><title>mutex가 몬지 몰?루</title><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><link rel="stylesheet" href="../../../main.css" type="text/css"></head><body><header><a id="title" href="../../.."><h1>scarf@127.0.0.1</h1></a><nav><ul><li><a href="../../../about">About</a></li><li><a href="../..">Posts</a></li><li><a href="../../../tags">Tags</a></li></ul></nav><hr></header><section><content><article><h1><a href="">mutex가 몬지 몰?루</a></h1><nav style="display:flex; height: 100%"><p>2022/01/15 12:53:43 Sat</p><a class="tag" href="../../../tags/linux">linux</a></nav><br><p></p><h2>3줄 요약</h2>
+<ul>
+<li>뮤텍스(mutex)는 공중전화 부스 <strong>열쇠</strong>와 같다</li>
+<li>열쇠를 가진 사람만 전화(작업)를 할 수 있다(pthread_mutex_lock)</li>
+<li>전화를 하고 나면 다른 사람이 쓸 수 있게 열쇠를 반납한다(pthread_mutex_unlock)</li>
+</ul>
+<h2>mutex가 필요한 상황</h2>
+<pre><code class="language-c hljs"><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;stdio.h&gt;</span></span>
+<span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;pthread.h&gt;</span></span>
+<span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;stdbool.h&gt;</span></span>
+
+<span class="hljs-keyword">typedef</span> <span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">s_data</span> {</span>
+	<span class="hljs-type">int</span> id;
+	<span class="hljs-type">int</span> *val;
+	<span class="hljs-type">pthread_mutex_t</span> *mutex;
+} data;
+
+<span class="hljs-type">void</span> *<span class="hljs-title function_">thread_func</span><span class="hljs-params">(<span class="hljs-type">void</span> *arg)</span> {
+	data *a = (data *)arg;
+	<span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i = <span class="hljs-number">0</span>; i &lt; <span class="hljs-number">100000</span>; i++)
+		*a-&gt;val += <span class="hljs-number">1</span>;
+
+	<span class="hljs-built_in">printf</span>(<span class="hljs-string">"[스레드 %d] val의 값을 100000만큼 증가시켰다. val:%d\n"</span>, a-&gt;id, *a-&gt;val);
+}
+
+<span class="hljs-type">int</span> <span class="hljs-title function_">main</span><span class="hljs-params">(<span class="hljs-type">void</span>)</span> {
+	<span class="hljs-keyword">const</span> <span class="hljs-type">int</span> size = <span class="hljs-number">1</span>;
+
+	<span class="hljs-comment">// 변화시킬 값</span>
+	<span class="hljs-type">int</span> num = <span class="hljs-number">0</span>;
+	<span class="hljs-type">int</span> *val = &amp;num;
+
+	<span class="hljs-comment">// 스레드 생성</span>
+	data arg[size];
+	<span class="hljs-type">pthread_t</span> thread[size];
+	<span class="hljs-type">pthread_mutex_t</span> mutex;
+
+	pthread_mutex_init(&amp;mutex, <span class="hljs-literal">NULL</span>);
+	<span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i = <span class="hljs-number">0</span>; i &lt; size; i++) {
+		arg[i].id = i;
+		arg[i].mutex = &amp;mutex;
+		arg[i].val = val;
+		<span class="hljs-built_in">printf</span>(<span class="hljs-string">"%d번째 스레드 생성\n"</span>, i);
+		pthread_create(&amp;(thread[i]), <span class="hljs-literal">NULL</span>, thread_func, &amp;arg[i]);
+	}
+	<span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i = <span class="hljs-number">0</span>; i &lt; size; i++)
+		pthread_join(thread[i], <span class="hljs-literal">NULL</span>);
+	<span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
+}
+
+<span class="hljs-number">0</span>번째 스레드 생성
+[스레드 <span class="hljs-number">0</span>] val의 값을 <span class="hljs-number">100000</span>만큼 증가시켰다. val:<span class="hljs-number">100000</span>
+</code></pre>
+<p>별 문제 없어보인다. 그런데 val의 값을 여러 스레드가 동시에 접근한다면?</p>
+<pre><code class="language-c hljs">...
+<span class="hljs-keyword">const</span> <span class="hljs-type">int</span> size = <span class="hljs-number">2</span>;
+...
+
+<span class="hljs-number">0</span>번째 스레드 생성
+<span class="hljs-number">1</span>번째 스레드 생성
+<span class="hljs-number">2</span>번째 스레드 생성
+[스레드 <span class="hljs-number">1</span>] val의 값을 <span class="hljs-number">100000</span>만큼 증가시켰다. val:<span class="hljs-number">100068</span>
+[스레드 <span class="hljs-number">2</span>] val의 값을 <span class="hljs-number">100000</span>만큼 증가시켰다. val:<span class="hljs-number">100215</span>
+[스레드 <span class="hljs-number">0</span>] val의 값을 <span class="hljs-number">100000</span>만큼 증가시켰다. val:<span class="hljs-number">200215</span>
+</code></pre>
+<p>서로 동시에 값을 조작하니 원하는 결과가 나오지 않는다.
+스레드가 열쇠(mutex)를 가질 때까지 기다렸다가 열쇠를 갖고 있어야만 작업을 할 수 있게 한다면?</p>
+<pre><code class="language-c hljs"><span class="hljs-type">void</span> *<span class="hljs-title function_">thread_func</span><span class="hljs-params">(<span class="hljs-type">void</span> *arg)</span> {
+	data *a = (data *)arg;
+
+	pthread_mutex_lock(a-&gt;mutex);
+	<span class="hljs-built_in">printf</span>(<span class="hljs-string">"[스레드 %d] 뮤텍스를 획득했다.\n"</span>, a-&gt;id);
+	<span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i = <span class="hljs-number">0</span>; i &lt; <span class="hljs-number">100000</span>; i++)
+		*a-&gt;val += <span class="hljs-number">1</span>;
+	<span class="hljs-built_in">printf</span>(<span class="hljs-string">"[스레드 %d] val의 값을 100000만큼 증가시켰다. val:%d\n"</span>, a-&gt;id, *a-&gt;val);
+	pthread_mutex_unlock(a-&gt;mutex);
+	<span class="hljs-built_in">printf</span>(<span class="hljs-string">"[스레드 %d] 뮤텍스를 반납했다.\n"</span>, a-&gt;id);
+}
+<span class="hljs-number">0</span>번째 스레드 생성
+<span class="hljs-number">1</span>번째 스레드 생성
+[스레드 <span class="hljs-number">0</span>] 뮤텍스를 획득했다.
+<span class="hljs-number">2</span>번째 스레드 생성
+[스레드 <span class="hljs-number">0</span>] val의 값을 <span class="hljs-number">100000</span>만큼 증가시켰다. val:<span class="hljs-number">100000</span>
+[스레드 <span class="hljs-number">0</span>] 뮤텍스를 반납했다.
+[스레드 <span class="hljs-number">1</span>] 뮤텍스를 획득했다.
+[스레드 <span class="hljs-number">1</span>] val의 값을 <span class="hljs-number">100000</span>만큼 증가시켰다. val:<span class="hljs-number">200000</span>
+[스레드 <span class="hljs-number">1</span>] 뮤텍스를 반납했다.
+[스레드 <span class="hljs-number">2</span>] 뮤텍스를 획득했다.
+[스레드 <span class="hljs-number">2</span>] val의 값을 <span class="hljs-number">100000</span>만큼 증가시켰다. val:<span class="hljs-number">300000</span>
+[스레드 <span class="hljs-number">2</span>] 뮤텍스를 반납했다.
+</code></pre>
+<h2>참고자료</h2>
+<p><a href="https://linux.die.net/man/3/pthread_mutex_init">pthread_mutex_init</a>
+<a href="https://linux.die.net/man/3/pthread_mutex_destroy">pthread_mutex_destroy</a>
+<a href="https://linux.die.net/man/3/pthread_mutex_lock">pthread_mutex_lock</a></p>
+<p></p></article><hr><script src="https://utteranc.es/client.js" repo="scarf005/comments" issue-term="pathname" label="comment" theme="github-dark" crossorigin="anonymous" async=""></script></content></section><footer></footer><link rel="stylesheet" href="../../../fonts.css" type="text/css"></body></html>

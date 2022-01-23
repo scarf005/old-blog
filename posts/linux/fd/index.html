@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html><head><title>파일 식별자(file descriptor)란?</title><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><link rel="stylesheet" href="../../../main.css" type="text/css"></head><body><header><a id="title" href="../../.."><h1>scarf@127.0.0.1</h1></a><nav><ul><li><a href="../../../about">About</a></li><li><a href="../..">Posts</a></li><li><a href="../../../tags">Tags</a></li></ul></nav><hr></header><section><content><article><h1><a href="">파일 식별자(file descriptor)란?</a></h1><nav style="display:flex; height: 100%"><p>2022/01/15 13:43:57 Sat</p><a class="tag" href="../../../tags/linux">linux</a></nav><br><p></p><h2>3줄 요약</h2>
+<ul>
+<li>어떠한 <strong>파일</strong>을 가리키는 <strong>바로가기</strong></li>
+<li>파일은 파일 뿐만 아니라 디렉토리, 파이프 등 다양함</li>
+<li>0은 <code>표준 입력</code>, 1은 <code>표준 출력</code>, 2는 <code>표준 오류</code></li>
+</ul>
+<h2>파일 식별자를 알아보자</h2>
+<ul>
+<li><code>파일 디스크립터</code>, <code>파일 식별자</code>라고 하니까 설명을 아무리 읽어도 이해가 가지 않는다.</li>
+<li>하지만 하는 일은 쉽게 생각해서 <strong>바로가기</strong>다.</li>
+<li>물론 실제 바로가기와 <em>완전히 같지는 않다.</em> 차이는 나중에 알아보자.</li>
+</ul>
+<p>수학귀신에서 어렵게 팩토리얼이라고 하지 않는다. <strong>쾅</strong>이라고 부른다. 마찬가지로 이제부터는 파일 식별자가 아니다. <strong>바로가기</strong>다.</p>
+<p>프로그램이 실행되면 기본적으로 <code>바로가기</code> 3개를 가지게 된다.</p>
+<ul>
+<li>0 -&gt; 표준 입력</li>
+<li>1 -&gt; 표준 출력</li>
+<li>2 -&gt; 표준 오류</li>
+</ul>
+<p>보통은 표준 입력에서 읽어와서 표준 출력이나 오류로 내보내게 된다.</p>
+<h3>open</h3>
+<pre><code class="language-c hljs"><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;sys/types.h&gt;</span></span>
+<span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;sys/stat.h&gt;</span></span>
+<span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;fcntl.h&gt;</span></span>
+<span class="hljs-type">int</span> <span class="hljs-title function_">open</span><span class="hljs-params">(<span class="hljs-keyword">const</span> <span class="hljs-type">char</span> *pathname, <span class="hljs-type">int</span> flags)</span>
+<span class="hljs-type">int</span> <span class="hljs-title function_">open</span><span class="hljs-params">(<span class="hljs-keyword">const</span> <span class="hljs-type">char</span> *pathname, <span class="hljs-type">int</span> flags, <span class="hljs-type">mode_t</span> mode)</span>
+"파일을 <span class="hljs-params">(만들고)</span> 열기"
+
+
+</code></pre>
+<ul>
+<li>파일을 열고(아니면 만들고) 그 파일을 가리키는 <code>바로가기</code>를 반환한다.</li>
+</ul>
+<h3>read</h3>
+<pre><code class="language-c hljs"><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;unistd.h&gt;</span></span>
+<span class="hljs-type">ssize_t</span> <span class="hljs-title function_">read</span><span class="hljs-params">(<span class="hljs-type">int</span> fd, <span class="hljs-type">void</span> *buf, <span class="hljs-type">size_t</span> count)</span>
+"바로가기가 가리키는 파일을 바이트로 읽기"
+
+fd: 바로가기
+buf: 읽은 바이트를 저장할 버퍼 포인터
+count: 읽을 양
+반환값: 읽은 바이트 수
+</code></pre>
+<pre><code class="language-c hljs"><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;fcntl.h&gt;</span></span>
+<span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;stdio.h&gt;</span></span>
+<span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;unistd.h&gt;</span></span>
+
+<span class="hljs-type">int</span> <span class="hljs-title function_">main</span><span class="hljs-params">(<span class="hljs-type">void</span>)</span> {
+  <span class="hljs-type">int</span> 바로가기;
+  <span class="hljs-type">char</span> 읽은내용[<span class="hljs-number">8</span>];
+
+  <span class="hljs-comment">// 읽기 전용 &amp; 추가 모드로 파일 열기</span>
+  바로가기 = open(<span class="hljs-string">"a.txt"</span>, O_RDWR | O_CREAT | O_APPEND, <span class="hljs-number">0644</span>);
+  <span class="hljs-keyword">if</span> (바로가기 &lt; <span class="hljs-number">0</span>) {
+    perror(<span class="hljs-string">"파일 열던 중 오류 발생\n"</span>);
+    <span class="hljs-built_in">exit</span>(<span class="hljs-number">0</span>);
+  }
+  <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i = <span class="hljs-number">0</span>; i &lt; <span class="hljs-number">3</span>; i++) {
+    <span class="hljs-built_in">memset</span>(읽은내용, <span class="hljs-number">0</span>, <span class="hljs-keyword">sizeof</span>(읽은내용));
+    read(바로가기, 읽은내용, <span class="hljs-keyword">sizeof</span>(읽은내용));
+    <span class="hljs-built_in">printf</span>(<span class="hljs-string">"[인덱스 %d] %s\n"</span>, i, 읽은내용);
+  }
+  close(바로가기);
+}
+</code></pre>
+<p>예제 코드에서 변수 <code>바로가기</code>는 "a.txt"에 대한 바로가기를 담고 있다.</p>
+<h3>dup</h3>
+<pre><code class="language-c hljs"><span class="hljs-type">int</span> <span class="hljs-title function_">dup</span><span class="hljs-params">(<span class="hljs-type">int</span> oldfd)</span>
+
+oldfd: 복사할 바로가기
+반환값: 새로 만들어진 바로가기
+</code></pre>
+<p><code>바로가기</code>를 복사해서 반환한다. 가령 <code>마인크래프트.exe</code> 게임의 바로가기 <code>마인크래프트 - 바로가기</code>가 있다고 해보자. 이 바로가기를 복사하면 어떻게 될까? <code>마인크래프트.exe</code> 에는 변화가 없고 <code>마인크래프트 - 바로가기(2)</code>가 생길 것이다.</p>
+<p>마찬가지로 <code>dup()</code>을 실행하면 oldfd <code>바로가기</code>를 복사해 새로운 <code>바로가기</code>를 반환한다. 이때 새 바로가기는 남는 번호중 가장 낮은 번호가 나온다. 어떤 이야기냐면 바로가기를 계속 만들면</p>
+<ul>
+<li><code>마인크래프트 - 바로가기(3)</code></li>
+<li><code>마인크래프트 - 바로가기(4)</code></li>
+<li>...
+가 생기듯 4, 5, 6... 같은 식으로 다음에 남는 번호의 바로가기를 만들어 준다는 것이다.</li>
+</ul>
+<pre><code class="language-c hljs"><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;fcntl.h&gt;</span></span>
+<span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;stdio.h&gt;</span></span>
+<span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;unistd.h&gt;</span></span>
+
+<span class="hljs-type">int</span> <span class="hljs-title function_">main</span><span class="hljs-params">()</span> {
+  <span class="hljs-type">int</span> foo바로가기 = open(<span class="hljs-string">"foo.txt"</span>, O_CREAT | O_WRONLY | O_APPEND, <span class="hljs-number">0644</span>);
+  <span class="hljs-type">int</span> foo바로가기<span class="hljs-number">2</span> = dup(foo바로가기);
+
+  <span class="hljs-built_in">printf</span>(<span class="hljs-string">"foo바로가기: %d, foo바로가기2: %d\n"</span>, foo바로가기, foo바로가기<span class="hljs-number">2</span>);
+  write(foo바로가기, <span class="hljs-string">"안녕 세상! ~ foo.txt - 바로가기\n"</span>, <span class="hljs-number">41</span>);
+  write(foo바로가기<span class="hljs-number">2</span>, <span class="hljs-string">"난 안녕 못한데 ~ foo.txt - 바로가기(2)\n"</span>, <span class="hljs-number">50</span>);
+  close(foo바로가기);
+  close(foo바로가기<span class="hljs-number">2</span>);
+  <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
+}
+❯ cat foo.txt
+안녕 세상! ~ foo.txt - 바로가기
+난 안녕 못한데 ~ foo.txt - 바로가기(<span class="hljs-number">2</span>)
+</code></pre>
+<p><code>foo바로가기</code>, <code>foo바로가기2</code> 모두 같은 <code>foo.txt</code> 파일을 가리키고 있다.</p>
+<h3>dup2</h3>
+<pre><code class="language-c hljs"><span class="hljs-type">int</span> <span class="hljs-title function_">dup2</span><span class="hljs-params">(<span class="hljs-type">int</span> oldfd, <span class="hljs-type">int</span> newfd)</span>
+"newfd가 가리키는 파일을 oldfd가 가리키는 파일로 바꾼다"
+만약 newfd 바로가기가 이미 열려 있었으면 닫은 후 새로 열게 된다
+반환값: newfd
+</code></pre>
+<h4>예제 1</h4>
+<pre><code class="language-c hljs"><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;fcntl.h&gt;</span></span>
+<span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;stdio.h&gt;</span></span>
+<span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;unistd.h&gt;</span></span>
+
+<span class="hljs-type">int</span> <span class="hljs-title function_">main</span><span class="hljs-params">()</span> {
+  <span class="hljs-type">int</span> bar바로가기 = open(<span class="hljs-string">"bar.txt"</span>, O_CREAT | O_WRONLY | O_APPEND, <span class="hljs-number">0644</span>);
+  <span class="hljs-type">int</span> 반환값 = dup2(bar바로가기, STDOUT_FILENO);
+
+	<span class="hljs-built_in">printf</span>(<span class="hljs-string">"반환값: %d, bar바로가기: %d\n"</span>, 반환값, bar바로가기);
+  <span class="hljs-built_in">printf</span>(<span class="hljs-string">"HAYO!\n"</span>);
+  <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
+}
+❯ ./<span class="hljs-string">"dup"</span>
+❯ cat bar.txt
+반환값: <span class="hljs-number">1</span>, bar바로가기: <span class="hljs-number">3</span>
+HAYO!
+</code></pre>
+<p><code>printf</code>를 했는데 터미널에 출력이 뜨지 않고 <code>bar.txt</code>에 그 내용이 기록되었다. 어째서일까? 우선 <code>STDOUT_FILENO</code>는 <code>표준 출력 바로가기</code>와 같다. 지금까지</p>
+<ul>
+<li>bar바로가기 -&gt; "bar.txt"</li>
+<li>표준 출력 바로가기` -&gt; 표준 출력</li>
+</ul>
+<p>였다면 dup2로 표준 출력 바로가기가 가리키는 파일을 bar바로가기와 똑같이 바꿔줘서</p>
+<ul>
+<li>bar바로가기 -&gt; "bar.txt"</li>
+<li>(좀 전까지)표준 출력 바로가기` -&gt; "bar.txt"</li>
+</ul>
+<p>가 된 것이다. printf는 <code>표준 출력 바로가기</code>가 가리키는 파일에 내용을 출력하는데 이건 이제 "bar.txt"를 가리키는 <code>바로가기</code>가 되었으니 "bar.txt"에 출력 내용이 써지게 된 것이다.</p>
+<h4>예제 2</h4>
+<pre><code class="language-c hljs"><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;fcntl.h&gt;</span></span>
+<span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;stdio.h&gt;</span></span>
+<span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;unistd.h&gt;</span></span>
+
+<span class="hljs-type">int</span> <span class="hljs-title function_">main</span><span class="hljs-params">()</span> {
+  <span class="hljs-type">int</span> bar바로가기 = open(<span class="hljs-string">"bar.txt"</span>, O_CREAT | O_WRONLY | O_APPEND, <span class="hljs-number">0644</span>);
+  <span class="hljs-type">int</span> spam바로가기 = open(<span class="hljs-string">"spam.txt"</span>, O_CREAT | O_WRONLY | O_APPEND, <span class="hljs-number">0644</span>);
+  <span class="hljs-type">int</span> 반환값 = dup2(bar바로가기, spam바로가기);
+
+  <span class="hljs-built_in">printf</span>(<span class="hljs-string">"반환값: %d, bar바로가기: %d, spam바로가기: %d\n"</span>, 반환값, bar바로가기,
+         spam바로가기);
+	write(bar바로가기, <span class="hljs-string">"애옹\n"</span>, <span class="hljs-number">8</span>);
+  write(spam바로가기, <span class="hljs-string">"꿈틀꿈틀\n"</span>, <span class="hljs-number">14</span>);
+  <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
+}
+❯ ./<span class="hljs-string">"dup"</span>
+반환값: <span class="hljs-number">4</span>, bar바로가기: <span class="hljs-number">3</span>, spam바로가기: <span class="hljs-number">4</span>
+❯ cat bar.txt
+애옹
+꿈틀꿈틀
+</code></pre>
+<ul>
+<li>bar바로가기 -&gt; "bar.txt"</li>
+<li>spam바로가기 -&gt; "spam.txt"</li>
+</ul>
+<p>dup2로 spam바로가기가 bar바로가기와 같은 파일을 가리키게 바꾸면</p>
+<ul>
+<li>bar바로가기 -&gt; "bar.txt"</li>
+<li>spam바로가기 -&gt; "bar.txt"</li>
+</ul>
+<h2>참고자료</h2>
+<p><a href="https://geek-university.com/linux/inode/">inode</a>
+<a href="https://rocksea.tistory.com/20">inode #2</a>
+<a href="https://ehpub.co.kr/%EB%A6%AC%EB%88%85%EC%8A%A4-%EC%8B%9C%EC%8A%A4%ED%85%9C-%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%B0%8D-3-5-%ED%8C%8C%EC%9D%BC-%ED%85%8C%EC%9D%B4%EB%B8%94%EA%B3%BC-%ED%8C%8C%EC%9D%BC-%EB%94%94/">파일 테이블/파일 식별자 테이블</a>
+<a href="https://www.computerhope.com/jargon/f/file-descriptor.htm">파일 디스크립터</a>
+<a href="https://www.reddit.com/r/linuxquestions/comments/2tk2p1/if_everything_is_a_file_why_cant_i_do_cat/">디렉토리도 파일인데 cat이 안 되는 이유</a>
+<a href="https://rrhh234cm.tistory.com/184">ext4 파일시스템 구조</a></p>
+<p></p></article><hr><script src="https://utteranc.es/client.js" repo="scarf005/comments" issue-term="pathname" label="comment" theme="github-dark" crossorigin="anonymous" async=""></script></content></section><footer></footer><link rel="stylesheet" href="../../../fonts.css" type="text/css"></body></html>

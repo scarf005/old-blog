@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html><head><title>var vs let vs const</title><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><link rel="stylesheet" href="../../../main.css" type="text/css"></head><body><header><a id="title" href="../../.."><h1>scarf@127.0.0.1</h1></a><nav><ul><li><a href="../../../about">About</a></li><li><a href="../..">Posts</a></li><li><a href="../../../tags">Tags</a></li></ul></nav><hr></header><section><content><article><h1><a href="">var vs let vs const</a></h1><nav style="display:flex; height: 100%"><p>2022/01/15 21:23:07 Sat</p><a class="tag" href="../../../tags/javascript">javascript</a></nav><br><p></p><h2>3줄 요약</h2>
+<ul>
+<li>무조건 <code>const</code>로 선언</li>
+<li>값이 변해야 할 일이 있으면 <code>let</code>으로 선언</li>
+<li><code>var</code>은 쓰지 말자</li>
+</ul>
+<h2>var</h2>
+<ul>
+<li><code>ES6</code> / <code>ECMAScript 2015</code> 이전까지 <strong>유일한</strong> 변수 정의 방식</li>
+<li><a href="#%ED%98%B8%EC%9D%B4%EC%8A%A4%ED%8C%85">호이스팅</a>으로 인해 의도치 않은 결과가 발생함</li>
+</ul>
+<h2>let</h2>
+<ul>
+<li><code>ES6</code> / <code>ECMAScript 2015</code> <strong>이후</strong>로 추가된 <strong>변수</strong> 정의 방식</li>
+<li>블록 안에서만 사용 가능</li>
+</ul>
+<pre><code class="language-js hljs language-javascript"><span class="hljs-keyword">let</span> x = <span class="hljs-number">1</span>
+{
+  <span class="hljs-keyword">let</span> x = <span class="hljs-number">2</span>
+  <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(x)
+  <span class="hljs-comment">// 예상값: 2</span>
+}
+
+<span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(x)
+<span class="hljs-comment">// 예상값: 1</span>
+
+&gt; <span class="hljs-number">2</span>
+&gt; <span class="hljs-number">1</span>
+</code></pre>
+<pre><code class="language-js hljs language-javascript"><span class="hljs-keyword">let</span> x = <span class="hljs-number">1</span>
+{
+  <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(x)
+  <span class="hljs-keyword">let</span> x = <span class="hljs-number">2</span>
+}
+&gt; <span class="hljs-title class_">Uncaught</span> <span class="hljs-title class_">ReferenceError</span>: <span class="hljs-title class_">Cannot</span> access <span class="hljs-string">'x'</span> before initialization
+    at &lt;anonymous&gt;:<span class="hljs-number">4</span>:<span class="hljs-number">15</span>
+</code></pre>
+<ul>
+<li><a href="#Temporal-Dead-Zone-(TDZ)">let에서도 호이스팅이 일어난다</a></li>
+</ul>
+<h2>const</h2>
+<ul>
+<li><code>ES6</code> / <code>ECMAScript 2015</code> <strong>이후</strong>로 추가된 <strong>상수</strong> 정의 방식</li>
+<li>블록 안에서만 사용 가능</li>
+</ul>
+<h2>호이스팅</h2>
+<ul>
+<li><a href="https://developer.mozilla.org/ko/docs/Glossary/Hoisting">mdn 레퍼런스</a></li>
+<li><strong>초기화</strong>가 아닌 <strong>선언</strong>은 모두 호이스팅 대상
+<ul>
+<li>예외: <code>var</code></li>
+</ul>
+</li>
+</ul>
+<h3>Temporal Dead Zone (TDZ)</h3>
+<ul>
+<li><code>let</code>과 <code>var</code>도 <strong>호이스팅 대상</strong></li>
+<li>하지만 값이 <code>var</code>과 달리 <code>undefined</code>로 초기화되지 않으므로 <code>TDZ</code> 상태에 놓이게 됨</li>
+<li>아직 값이 초기화되지 않으므로 참조시 <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/ReferenceError">ReferenceError</a> 발생</li>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/let#temporal_dead_zone_tdz">mdn 레퍼런스</a></li>
+</ul>
+<h3>var</h3>
+<pre><code class="language-js hljs language-javascript">var_선언
+<span class="hljs-keyword">var</span> var_선언
+&lt;- <span class="hljs-literal">undefined</span>
+
+var_초기화
+<span class="hljs-keyword">var</span> var_초기화 = <span class="hljs-number">1</span>
+&lt;- <span class="hljs-literal">undefined</span>
+</code></pre>
+<h3>익명 global (키워드 없이 선언)</h3>
+<pre><code class="language-js hljs language-javascript">global_초기화
+global_초기화 = <span class="hljs-number">2</span>
+&lt;- <span class="hljs-title class_">Uncaught</span> <span class="hljs-title class_">ReferenceError</span>: global_초기화 is not defined
+    at &lt;anonymous&gt;:<span class="hljs-number">1</span>:<span class="hljs-number">1</span>
+</code></pre>
+<h3>let, const</h3>
+<pre><code class="language-js hljs language-javascript">let_선언
+<span class="hljs-keyword">let</span> let_선언
+&lt;- <span class="hljs-title class_">Uncaught</span> <span class="hljs-title class_">ReferenceError</span>: let_선언 is not defined
+    at &lt;anonymous&gt;:<span class="hljs-number">1</span>:<span class="hljs-number">1</span>
+
+let_초기화
+<span class="hljs-keyword">let</span> let_초기화 = <span class="hljs-number">3</span>
+&lt;- <span class="hljs-title class_">Uncaught</span> <span class="hljs-title class_">ReferenceError</span>: let_초기화 is not defined
+    at &lt;anonymous&gt;:<span class="hljs-number">1</span>:<span class="hljs-number">1</span>
+
+const_초기화
+<span class="hljs-keyword">const</span> const_초기화 = <span class="hljs-number">4</span>
+&lt;- <span class="hljs-title class_">Uncaught</span> <span class="hljs-title class_">ReferenceError</span>: const_초기화 is not defined
+    at &lt;anonymous&gt;:<span class="hljs-number">1</span>:<span class="hljs-number">1</span>
+</code></pre>
+<p></p></article><hr><script src="https://utteranc.es/client.js" repo="scarf005/comments" issue-term="pathname" label="comment" theme="github-dark" crossorigin="anonymous" async=""></script></content></section><footer></footer><link rel="stylesheet" href="../../../fonts.css" type="text/css"></body></html>

@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html><head><title>compound literal로 일회용 배열/구조체 만들기</title><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><link rel="stylesheet" href="../../../main.css" type="text/css"></head><body><header><a id="title" href="../../.."><h1>scarf@127.0.0.1</h1></a><nav><ul><li><a href="../../../about">About</a></li><li><a href="../..">Posts</a></li><li><a href="../../../tags">Tags</a></li></ul></nav><hr></header><section><content><article><h1><a href="">compound literal로 일회용 배열/구조체 만들기</a></h1><nav style="display:flex; height: 100%"><p>2022/01/16 13:46:29 Sun</p><a class="tag" href="../../../tags/c">c</a></nav><br><p></p><h2>compound literal이란</h2>
+<ul>
+<li><code>(자료형){생성자 목록}</code> 형식으로 선언하는 익명 객체</li>
+<li>일회용 <strong>배열</strong>, <strong>구조체</strong> 등이 필요할 때 사용</li>
+<li><a href="https://en.cppreference.com/w/c/language/compound_literal">cpp레퍼런스</a></li>
+</ul>
+<h2>활용</h2>
+<h3>배열</h3>
+<pre><code class="language-c hljs"><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;stdio.h&gt;</span></span>
+
+<span class="hljs-type">void</span> <span class="hljs-title function_">passArr</span><span class="hljs-params">(<span class="hljs-type">int</span> arr[])</span> {
+	<span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i = <span class="hljs-number">0</span>; i &lt; <span class="hljs-number">3</span>; i++)
+		<span class="hljs-built_in">printf</span>(<span class="hljs-string">"%d "</span>, arr[i]);
+	<span class="hljs-built_in">printf</span>(<span class="hljs-string">"\n"</span>);
+}
+
+<span class="hljs-type">int</span> <span class="hljs-title function_">main</span><span class="hljs-params">(<span class="hljs-type">void</span>)</span>{
+  	<span class="hljs-type">int</span> arr[] = {<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>};
+  	passArr(arr);
+	passArr((<span class="hljs-type">int</span>[]){<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>});
+	<span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
+}
+
+<span class="hljs-comment">/*
+1 2 3
+1 2 3
+/*
+</span></code></pre>
+<h3>구조체</h3>
+<pre><code class="language-c hljs"><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;stdio.h&gt;</span></span>
+
+<span class="hljs-keyword">typedef</span> <span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">s_vec2</span> {</span>
+	<span class="hljs-type">int</span> x;
+	<span class="hljs-type">int</span> y;
+} vec2;
+
+<span class="hljs-type">void</span> <span class="hljs-title function_">passVal</span><span class="hljs-params">(vec2 vec)</span> {
+	<span class="hljs-built_in">printf</span>(<span class="hljs-string">"%d %d\n"</span>, vec.x, vec.y);
+}
+
+<span class="hljs-type">void</span> <span class="hljs-title function_">passRef</span><span class="hljs-params">(vec2 *vec)</span> {
+	<span class="hljs-built_in">printf</span>(<span class="hljs-string">"%d %d\n"</span>, vec-&gt;x, vec-&gt;y);
+}
+
+<span class="hljs-type">int</span> <span class="hljs-title function_">main</span><span class="hljs-params">(<span class="hljs-type">void</span>)</span>{
+	vec2 vec_a = {<span class="hljs-number">1</span>, <span class="hljs-number">2</span>};
+	passVal(vec_a);
+	passVal((vec2){<span class="hljs-number">1</span>, <span class="hljs-number">2</span>});
+	vec2 vec_b = {.x=<span class="hljs-number">3</span>, .y=<span class="hljs-number">4</span>};
+	passRef(&amp;vec_b);
+	passRef(&amp;(vec2){.x=<span class="hljs-number">3</span>, .y=<span class="hljs-number">4</span>});
+	<span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
+}
+<span class="hljs-comment">/*
+1 2
+1 2
+3 4
+3 4
+*/</span>
+</code></pre>
+<p></p></article><hr><script src="https://utteranc.es/client.js" repo="scarf005/comments" issue-term="pathname" label="comment" theme="github-dark" crossorigin="anonymous" async=""></script></content></section><footer></footer><link rel="stylesheet" href="../../../fonts.css" type="text/css"></body></html>

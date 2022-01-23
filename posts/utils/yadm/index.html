@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html><head><title>yadm으로 설정파일 동기화하기</title><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><link rel="stylesheet" href="../../../main.css" type="text/css"></head><body><header><a id="title" href="../../.."><h1>scarf@127.0.0.1</h1></a><nav><ul><li><a href="../../../about">About</a></li><li><a href="../..">Posts</a></li><li><a href="../../../tags">Tags</a></li></ul></nav><hr></header><section><content><article><h1><a href="">yadm으로 설정파일 동기화하기</a></h1><nav style="display:flex; height: 100%"><p>2022/01/08 23:20:56 Sat</p></nav><br><p></p><h2>yadm?</h2>
+<ul>
+<li><a href="https://yadm.io/">yadm</a>은 <code>yet another dotfiles manager</code>의 약자</li>
+<li>설정파일용 <a href="https://git-scm.com/">git</a></li>
+<li><a href="https://github.com/">github</a> 레포를 클론해서 다른 컴퓨터에서도 설정 목록을 내려받을 수 있다</li>
+</ul>
+<h2>사용법</h2>
+<p><a href="https://yadm.io/docs/overview">overview</a></p>
+<ul>
+<li>git과 거의 비슷하게 동작한다</li>
+<li>설정 파일을 따로 옮길 필요가 없다</li>
+</ul>
+<p>처음에 이걸 몰라서 찾게 쉽게설정파일을 전부 한 곳에 몰아넣었는데, 굳이 그럴 이유가 없다. 앞으로는 심링크 방향을 반대로 해야 할듯?</p>
+<pre><code class="language-bash hljs">yadm add ~/.zshrc
+yadm <span class="hljs-built_in">clone</span> github.com/scarf005/dotfiles
+yadm status
+</code></pre>
+<p></p></article><hr><script src="https://utteranc.es/client.js" repo="scarf005/comments" issue-term="pathname" label="comment" theme="github-dark" crossorigin="anonymous" async=""></script></content></section><footer></footer><link rel="stylesheet" href="../../../fonts.css" type="text/css"></body></html>

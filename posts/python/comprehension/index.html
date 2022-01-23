@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html><head><title>comprehension 표현식 써보기</title><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><link rel="stylesheet" href="../../../main.css" type="text/css"></head><body><header><a id="title" href="../../.."><h1>scarf@127.0.0.1</h1></a><nav><ul><li><a href="../../../about">About</a></li><li><a href="../..">Posts</a></li><li><a href="../../../tags">Tags</a></li></ul></nav><hr></header><section><content><article><h1><a href="">comprehension 표현식 써보기</a></h1><nav style="display:flex; height: 100%"><p>2022/01/08 23:20:56 Sat</p><a class="tag" href="../../../tags/python">python</a></nav><br><p></p><p>파이썬을 만든 귀도 반 로섬은 <a href="https://www.artima.com/weblogs/viewpost.jsp?thread=98196">2005년 글</a>에서 <code>map</code>, <code>filter</code> <code>reduce</code> 같은 함수형 프로그래밍보다 <code>list comprehension</code> 이 더 읽기에 좋다고 했다. 그렇다면 이거는 어떻게 쓰는 걸까?</p>
+<h2>comprehension이란?</h2>
+<p>리스트를 간결하게 만들어낼 수 있는 문법이다. 기존에 <code>[0, 1, 2, 3, 4, 5]</code>을 만들려고</p>
+<pre><code class="language-python hljs">lst = []
+<span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(<span class="hljs-number">6</span>):
+  lst.append(i)
+</code></pre>
+<p>이런 식을 썼었다면</p>
+<pre><code class="language-python hljs">lst = [i <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(<span class="hljs-number">6</span>)]
+</code></pre>
+<p><code>list comprehension</code>으로는 이렇게 한 줄로 가능하다.</p>
+<pre><code class="language-python hljs">[x <span class="hljs-keyword">for</span> x <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(<span class="hljs-number">6</span>) <span class="hljs-keyword">if</span> x % <span class="hljs-number">2</span> == <span class="hljs-number">0</span>]
+<span class="hljs-comment"># [0, 2, 4]</span>
+</code></pre>
+<pre><code class="language-py hljs language-python">[x <span class="hljs-keyword">if</span> x % <span class="hljs-number">2</span> == <span class="hljs-number">0</span> <span class="hljs-keyword">else</span> <span class="hljs-string">'!'</span> <span class="hljs-keyword">for</span> x <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(<span class="hljs-number">6</span>)]
+<span class="hljs-comment"># [0, '!', 2, '!', 4, '!']</span>
+</code></pre>
+<p>또 내부에서 간단하게 <code>if-else</code>문을 쓸 수 있다.</p>
+<pre><code class="language-py hljs language-python">[수식 <span class="hljs-keyword">for</span> 원소 <span class="hljs-keyword">in</span> 리스트 <span class="hljs-keyword">if</span> 조건문]
+</code></pre>
+<p>문법이 조금 다르지만 기본 구조는 위와 같다.</p>
+<pre><code class="language-py hljs language-python">[[<span class="hljs-number">0</span> <span class="hljs-keyword">for</span> _ <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(<span class="hljs-number">3</span>)] <span class="hljs-keyword">for</span> _ <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(<span class="hljs-number">2</span>)]
+<span class="hljs-comment"># [[0, 0, 0],</span>
+<span class="hljs-comment"># [0, 0, 0]]</span>
+</code></pre>
+<p>중첩해서 쓸 수도 있다.</p>
+<p></p></article><hr><script src="https://utteranc.es/client.js" repo="scarf005/comments" issue-term="pathname" label="comment" theme="github-dark" crossorigin="anonymous" async=""></script></content></section><footer></footer><link rel="stylesheet" href="../../../fonts.css" type="text/css"></body></html>

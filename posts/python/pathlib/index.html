@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html><head><title>pathlib 쓰는 법</title><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><link rel="stylesheet" href="../../../main.css" type="text/css"></head><body><header><a id="title" href="../../.."><h1>scarf@127.0.0.1</h1></a><nav><ul><li><a href="../../../about">About</a></li><li><a href="../..">Posts</a></li><li><a href="../../../tags">Tags</a></li></ul></nav><hr></header><section><content><article><h1><a href="">pathlib 쓰는 법</a></h1><nav style="display:flex; height: 100%"><p>2022/01/10 10:53:50 Mon</p><a class="tag" href="../../../tags/python">python</a></nav><br><p></p><h2>pathlib이란</h2>
+<ul>
+<li>경로를 <code>객체</code>로 다룰 수 있다</li>
+<li><a href="https://docs.python.org/ko/3/library/pathlib.html">공식 문서</a></li>
+</ul>
+<h2>경로 다루기</h2>
+<pre><code class="language-python hljs"><span class="hljs-keyword">from</span> pathlib <span class="hljs-keyword">import</span> path
+
+<span class="hljs-meta">&gt;&gt;&gt; </span><span class="hljs-keyword">from</span> pathlib <span class="hljs-keyword">import</span> Path
+<span class="hljs-meta">&gt;&gt;&gt; </span>p = Path()
+<span class="hljs-meta">&gt;&gt;&gt; </span>p
+PosixPath(<span class="hljs-string">'.'</span>)
+<span class="hljs-meta">&gt;&gt;&gt; </span>p = p / <span class="hljs-string">"디렉토리"</span>
+<span class="hljs-meta">&gt;&gt;&gt; </span>p
+PosixPath(<span class="hljs-string">'디렉토리'</span>)
+<span class="hljs-meta">&gt;&gt;&gt; </span>p /= <span class="hljs-string">"파일"</span>
+<span class="hljs-meta">&gt;&gt;&gt; </span>p
+PosixPath(<span class="hljs-string">'디렉토리/파일'</span>)
+<span class="hljs-meta">&gt;&gt;&gt; </span>p = p.with_suffix(<span class="hljs-string">".txt"</span>)
+<span class="hljs-meta">&gt;&gt;&gt; </span>p
+PosixPath(<span class="hljs-string">'디렉토리/파일.txt'</span>)
+</code></pre>
+<h2><code>Path()</code> 객체에서 찾기</h2>
+<pre><code class="language-python hljs"><span class="hljs-meta">&gt;&gt;&gt; </span>p.name
+<span class="hljs-string">'파일.txt'</span>
+<span class="hljs-meta">&gt;&gt;&gt; </span>p.parent
+PosixPath(<span class="hljs-string">'디렉토리'</span>)
+<span class="hljs-meta">&gt;&gt;&gt; </span>p.stem
+<span class="hljs-string">'파일'</span>
+</code></pre>
+<h2>디렉토리에서 찾기</h2>
+<pre><code class="language-python hljs">❯ tree .
+.
+├── dir1
+│&nbsp;&nbsp; ├── c.txt
+│&nbsp;&nbsp; └── dir2
+│&nbsp;&nbsp;     ├── a.txt
+│&nbsp;&nbsp;     └── b.txt
+├── dir3
+│&nbsp;&nbsp; └── d.txt
+└── e.txt
+
+<span class="hljs-meta">&gt;&gt;&gt; </span><span class="hljs-keyword">for</span> f <span class="hljs-keyword">in</span> Path().glob(<span class="hljs-string">"**/*.txt"</span>):
+<span class="hljs-meta">... </span>    <span class="hljs-built_in">print</span>(f)
+e.txt
+
+<span class="hljs-meta">&gt;&gt;&gt; </span><span class="hljs-keyword">for</span> f <span class="hljs-keyword">in</span> Path().glob(<span class="hljs-string">"**/*.txt"</span>):
+<span class="hljs-meta">... </span>    <span class="hljs-built_in">print</span>(f)
+e.txt
+dir1/c.txt
+dir1/dir2/b.txt
+dir1/dir2/a.txt
+dir3/d.txt
+
+<span class="hljs-meta">&gt;&gt;&gt; </span><span class="hljs-keyword">for</span> f <span class="hljs-keyword">in</span> Path().glob(<span class="hljs-string">"*"</span>):
+<span class="hljs-meta">... </span>    <span class="hljs-built_in">print</span>(f)
+dir1
+e.txt
+dir3
+</code></pre>
+<h2>mv 쓰기</h2>
+<pre><code class="language-python hljs"><span class="hljs-meta">&gt;&gt;&gt; </span>start = Path(<span class="hljs-string">'somedir/a.txt'</span>)
+<span class="hljs-meta">&gt;&gt;&gt; </span>to = Path(<span class="hljs-string">'./b.txt'</span>)
+<span class="hljs-meta">&gt;&gt;&gt; </span>start.rename(to)</code></pre>
+<p></p></article><hr><script src="https://utteranc.es/client.js" repo="scarf005/comments" issue-term="pathname" label="comment" theme="github-dark" crossorigin="anonymous" async=""></script></content></section><footer></footer><link rel="stylesheet" href="../../../fonts.css" type="text/css"></body></html>

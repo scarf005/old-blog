@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html><head><title>리눅스 명령어 이모저모</title><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><link rel="stylesheet" href="../../../main.css" type="text/css"></head><body><header><a id="title" href="../../.."><h1>scarf@127.0.0.1</h1></a><nav><ul><li><a href="../../../about">About</a></li><li><a href="../..">Posts</a></li><li><a href="../../../tags">Tags</a></li></ul></nav><hr></header><section><content><article><h1><a href="">리눅스 명령어 이모저모</a></h1><nav style="display:flex; height: 100%"><p>2022/01/15 13:16:08 Sat</p><a class="tag" href="../../../tags/linux">linux</a></nav><br><p></p><h2><code>ln</code> 순서 헷갈릴 때 보기</h2>
+<pre><code class="language-bash hljs">ln -s <span class="hljs-string">"원본파일"</span> <span class="hljs-string">"링크"</span>
+</code></pre>
+<ul>
+<li><code>cp</code>, <code>mv</code> 명령어와 <strong>원본</strong>과 <strong>목적지</strong>의 순서가 같다</li>
+<li>원본 파일을 가리키는 링크를 만든다</li>
+<li>실수로 원본과 목적지를 반대로 적어 실행하면 이미 파일이 있다는 오류가 뜬다. 이때 <code>-f</code> 명령어로 강제로 실행하면 덮어씌워지니 쓰면 안 된다.</li>
+</ul>
+<h2><code>rm</code> 안전하게 쓰기</h2>
+<p>rm은 위험하다. 평소에 조심해서 쓴다 해도</p>
+<ul>
+<li><code>rm ~</code>나</li>
+<li><code>rm / $HOME/a/b/c</code></li>
+</ul>
+<p>같은 실수를 무심결에 할 수 있다. 이때 <code>rm</code>의 사용을 막거나 <code>alias rm=trash</code>등 안전한 명령어로 바꾸어 놓으면 실수로 중요한 파일을 지우더라도 복구할 수 있다.</p>
+<ul>
+<li><a href="https://github.com/sindresorhus/trash-cli">trash-cli:삭제시 파일을 휴지통으로 옮긴다</a></li>
+<li><a href="https://github.com/kaelzhang/shell-safe-rm">safe-rm: rm이 적용되지 않는 디렉토리 목록을 정할 수 있다.</a></li>
+</ul>
+<p><a href="https://github.com/sindresorhus/guides/blob/main/how-not-to-rm-yourself.md#safeguard-rm">안전하게 rm 하는 법</a></p>
+<h2><code>apt</code>? <code>apt-get</code>?</h2>
+<p><a href="https://itsfoss.com/apt-vs-apt-get-difference/">it's foss</a></p>
+<ul>
+<li>
+<p><code>apt</code></p>
+<ul>
+<li>일반 사용자용</li>
+<li>간략한 명령어 옵션</li>
+<li>로딩 바, 패키지 목록등 편의성 기능</li>
+</ul>
+</li>
+<li>
+<p><code>apt-get</code></p>
+<ul>
+<li>고급 사용자 및 스크립팅용</li>
+<li>다양한 명령어 옵션</li>
+</ul>
+</li>
+</ul>
+<p></p></article><hr><script src="https://utteranc.es/client.js" repo="scarf005/comments" issue-term="pathname" label="comment" theme="github-dark" crossorigin="anonymous" async=""></script></content></section><footer></footer><link rel="stylesheet" href="../../../fonts.css" type="text/css"></body></html>

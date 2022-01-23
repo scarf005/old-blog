@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html><head><title>세미콜론(;) 없는 언어가 좋아</title><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><link rel="stylesheet" href="../../../main.css" type="text/css"></head><body><header><a id="title" href="../../.."><h1>scarf@127.0.0.1</h1></a><nav><ul><li><a href="../../../about">About</a></li><li><a href="../..">Posts</a></li><li><a href="../../../tags">Tags</a></li></ul></nav><hr></header><section><content><article><h1><a href="">세미콜론(;) 없는 언어가 좋아</a></h1><nav style="display:flex; height: 100%"><p>2022/01/23 21:31:31 Sun</p></nav><br><p></p><h2><code>;</code>가 몰까</h2>
+<ul>
+<li>우리말로는 쌍반점</li>
+<li>영어권에써 쓰지만 우리는 쓰지 않음</li>
+</ul>
+<h3>주로 쓰는 경우</h3>
+<ul>
+<li>원인 + 결과
+<code>She didn't sleep all night; the build failed.</code> (; == because)
+<code>The build failed; she didn't sleep all night</code> (; == so)</li>
+<li>조건 + 결과
+<code>Send the package; I'll pay.</code> (; == then)</li>
+<li>나열하는데 나열 대상에 쉼표가 들어가면</li>
+</ul>
+<h2>프로그래밍에서 쓰이게 된 계기</h2>
+<p><a href="https://betterprogramming.pub/a-brief-history-of-the-8efda9dde2b8">세미콜론의 역사</a>
+<a href="https://stackoverflow.com/questions/4701137/why-do-some-languages-need-semicolons">quora 답변</a></p>
+<ul>
+<li>과거 프로그래밍은 한 줄로 길게 입력해야 해서 구별자가 필요했다</li>
+<li>그 중에서 잘 안 쓰이는 문장부호인 <code>;</code>가 초기 언어(Algol, C...)들에서 주로 쓰였다</li>
+<li>초기 언어의 문법과 유사한 새 언어들이 나오면서 관습으로 내려왔다</li>
+</ul>
+<h2>어디에서 주로 쓰일까</h2>
+<h3>선언 구별자</h3>
+<p><code>a = 3</code>, <code>b = 0</code>를 한 줄에 합치면 <code>a = 3b = 0</code>인지 확인하기 어렵다. 이럴 때 구별자가 필요하다.</p>
+<h3>선언 종결자</h3>
+<p>컴파일러가 구문을 분석할 때 어디까지 선언이 이어지는지 확인해야 한다.</p>
+<h2>쓰지 않는 언어들은?</h2>
+<h3>키워드별로 선언의 길이가 정해진 언어</h3>
+<ul>
+<li>어셈블리</li>
+</ul>
+<pre><code class="language-x86asm hljs"><span class="hljs-comment">; hello-DOS.asm - single-segment, 16-bit "hello world" program</span>
+<span class="hljs-comment">;</span>
+<span class="hljs-comment">; assemble with "nasm -f bin -o hi.com hello-DOS.asm"</span>
+
+    org  <span class="hljs-number">0x100</span>        <span class="hljs-comment">; .com files always start 256 bytes into the segment</span>
+
+    <span class="hljs-comment">; int 21h is going to want...</span>
+
+    <span class="hljs-keyword">mov</span>  <span class="hljs-built_in">dx</span>, msg      <span class="hljs-comment">; the address of or message in dx</span>
+    <span class="hljs-keyword">mov</span>  <span class="hljs-number">ah</span>, <span class="hljs-number">9</span>        <span class="hljs-comment">; ah=9 - "print string" sub-function</span>
+    <span class="hljs-keyword">int</span>  <span class="hljs-number">0x21</span>         <span class="hljs-comment">; call dos services</span>
+
+    <span class="hljs-keyword">mov</span>  <span class="hljs-number">ah</span>, <span class="hljs-number">0x4c</span>     <span class="hljs-comment">; "terminate program" sub-function</span>
+    <span class="hljs-keyword">int</span>  <span class="hljs-number">0x21</span>         <span class="hljs-comment">; call dos services</span>
+
+    msg  <span class="hljs-built_in">db</span> <span class="hljs-string">'Hello, World!'</span>, <span class="hljs-number">0x0d</span>, <span class="hljs-number">0x0a</span>, <span class="hljs-string">'$'</span>   <span class="hljs-comment">; $-terminated message</span>
+</code></pre>
+<p><a href="https://montcs.bloomu.edu/Information/LowLevel/Assembly/hello-asm.html">코드 출처</a></p>
+<ul>
+<li>리스프</li>
+</ul>
+<pre><code class="language-lisp hljs">(<span class="hljs-name">defun</span> hello ()
+  (<span class="hljs-name">format</span> <span class="hljs-literal">t</span> <span class="hljs-string">"Hello, World!~%"</span>))
+</code></pre>
+<h3>줄바꿈 (<code>\n</code>)을 선언 종결자로 쓰는 언어</h3>
+<pre><code class="language-python hljs">
+<span class="hljs-keyword">def</span> <span class="hljs-title function_">sayhello</span>(<span class="hljs-params">name: <span class="hljs-built_in">str</span></span>) -&gt; <span class="hljs-built_in">str</span>:
+    <span class="hljs-keyword">if</span> name != <span class="hljs-string">"애옹"</span>:
+        <span class="hljs-keyword">return</span> <span class="hljs-string">f"안녕, <span class="hljs-subst">{name}</span>"</span>
+    <span class="hljs-keyword">else</span>:
+        <span class="hljs-keyword">return</span> <span class="hljs-string">"으에엑"</span>
+</code></pre>
+<pre><code class="language-go hljs"><span class="hljs-keyword">package</span> main
+
+<span class="hljs-keyword">import</span> <span class="hljs-string">"fmt"</span>
+
+<span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span> {
+	fmt.Println(<span class="hljs-string">"안녕, 세상"</span>)
+}
+</code></pre>
+<pre><code class="language-kotlin hljs"><span class="hljs-function"><span class="hljs-keyword">fun</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span> {
+    println(<span class="hljs-string">"안녕, 세상"</span>)
+}
+</code></pre>
+<h2>세미콜론 없는 언어를 좋아하는 이유</h2>
+<p>물론 주관적인 기준이라 근거가 될 수 없지만...</p>
+<h3>세미콜론을 치지 않아도 되서</h3>
+<ul>
+<li>처음 배운 언어가 액션스크립트랑 파이썬</li>
+<li>액션스크립트는 세미콜론 빼먹어서 생기는 오류가 너무 많아서 힘들었음</li>
+</ul>
+<h3>보기 더 예뻐서?</h3>
+<ul>
+<li>아무래도 처음 배운 언어가 파이썬이라서...</li>
+</ul>
+<h3>메소드 체이닝 할 때 편하다</h3>
+<pre><code class="language-js hljs language-javascript">foo
+  .<span class="hljs-title function_">map</span>(<span class="hljs-function"><span class="hljs-params">x</span> =&gt;</span> x ** <span class="hljs-number">2</span>)
+  .<span class="hljs-title function_">filter</span>(<span class="hljs-function"><span class="hljs-params">x</span> =&gt;</span> x &gt; <span class="hljs-number">6</span>)
+  (...)
+  .<span class="hljs-title function_">map</span>(<span class="hljs-function"><span class="hljs-params">x</span> =&gt;</span> x + <span class="hljs-number">16</span>)
+  .<span class="hljs-title function_">find</span>(<span class="hljs-function"><span class="hljs-params">x</span> =&gt;</span> x == <span class="hljs-number">4</span>);
+</code></pre>
+<ul>
+<li>만약 마지막 메소드를 맨 처음으로 옮겨야 한다면?</li>
+<li>메소드를 새로 추가해야 한다면?</li>
+<li>메소드 목록 중간에 세미콜론을 지우지 않아 거기까지만 실행되었다면?</li>
+</ul>
+<p>사소하지만 세미콜론을 지우고 새로 추가하는 게 의외로 손이 많이 간다</p>
+<h2>결론</h2>
+<p>물론 취향 차이지만 아무래도 세미콜론 없는 언어에 좀 더 관심이 생기는 거는 어쩔 수 업다</p>
+<p>줄바꿈 조.아</p>
+<p></p></article><hr><script src="https://utteranc.es/client.js" repo="scarf005/comments" issue-term="pathname" label="comment" theme="github-dark" crossorigin="anonymous" async=""></script></content></section><footer></footer><link rel="stylesheet" href="../../../fonts.css" type="text/css"></body></html>

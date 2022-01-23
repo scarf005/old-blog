@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html><head><title>냉혹한 philosopher의 세계</title><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><link rel="stylesheet" href="../../../main.css" type="text/css"></head><body><header><a id="title" href="../../.."><h1>scarf@127.0.0.1</h1></a><nav><ul><li><a href="../../../about">About</a></li><li><a href="../..">Posts</a></li><li><a href="../../../tags">Tags</a></li></ul></nav><hr></header><section><content><article><h1><a href="">냉혹한 philosopher의 세계</a></h1><nav style="display:flex; height: 100%"><p>2022/01/15 21:19:09 Sat</p><a class="tag" href="../../../tags/c">c</a></nav><br><p></p><h2>식사하는 철학자 문제</h2>
+<ul>
+<li><a href="https://en.wikipedia.org/wiki/Dining_philosophers_problem">위키피디아</a></li>
+<li><a href="https://nafuka11.github.io/philosophers-visualizer/">결과 확인</a></li>
+</ul>
+<p>목표: <strong>스레드</strong>, <strong>뮤텍스</strong>/<strong>세마포어</strong>로 식사하는 철학자 문제 해결</p>
+<h2>허용 함수 목록</h2>
+<h3>기본 기능</h3>
+<ul>
+<li>&lt;string.h&gt;
+<ul>
+<li>memset</li>
+</ul>
+</li>
+<li>&lt;stdio.h&gt;
+<ul>
+<li>printf</li>
+</ul>
+</li>
+<li>&lt;stdlib.h&gt;
+<ul>
+<li>malloc</li>
+<li>free</li>
+</ul>
+</li>
+<li>&lt;unistd.h&gt;
+<ul>
+<li>write</li>
+<li>usleep</li>
+</ul>
+</li>
+<li>&lt;sys/time.h&gt;
+<ul>
+<li>gettimeofday</li>
+</ul>
+</li>
+</ul>
+<h3>멀티스레딩</h3>
+<ul>
+<li>&lt;pthread.h&gt;
+<ul>
+<li>pthread_create</li>
+<li>pthread_detach</li>
+<li>pthread_join</li>
+<li>pthread_mutex_init</li>
+<li>pthread_mutex_destroy</li>
+<li>pthread_mutex_lock</li>
+<li>pthread_mutex_unlock</li>
+</ul>
+</li>
+</ul>
+<h2>목차</h2>
+<ul>
+<li><a href="../../linux/thread.md">pthread가 뭔지 몰?루</a></li>
+<li><a href="../../linux/mutex.md">mutex가 뭔지 몰?루</a></li>
+</ul>
+<h2>보너스 허용 함수 목록</h2>
+<h3>기본 기능</h3>
+<ul>
+<li>&lt;string.h&gt;
+<ul>
+<li>memset</li>
+</ul>
+</li>
+<li>&lt;stdio.h&gt;
+<ul>
+<li>printf</li>
+</ul>
+</li>
+<li>&lt;stdlib.h&gt;
+<ul>
+<li>malloc</li>
+<li>free</li>
+<li>exit</li>
+</ul>
+</li>
+<li>&lt;unistd.h&gt;
+<ul>
+<li>write</li>
+<li>usleep</li>
+</ul>
+</li>
+<li>&lt;sys/time.h&gt;
+<ul>
+<li>gettimeofday</li>
+</ul>
+</li>
+</ul>
+<h3>멀티프로세싱</h3>
+<ul>
+<li>&lt;unistd.h&gt;
+<ul>
+<li>fork</li>
+<li>kill</li>
+</ul>
+</li>
+<li>&lt;sys/wait.h&gt;
+<ul>
+<li>waitpid</li>
+</ul>
+</li>
+</ul>
+<h3>멀티스레딩</h3>
+<ul>
+<li>
+<p>&lt;pthread.h&gt;</p>
+<ul>
+<li>pthread_create</li>
+<li>pthread_detach</li>
+<li>pthread_join</li>
+</ul>
+</li>
+<li>
+<p>&lt;semaphore.h&gt;</p>
+<ul>
+<li>sem_open</li>
+<li>sem_close</li>
+<li>sem_post</li>
+<li>sem_wait</li>
+<li>sem_unlink</li>
+</ul>
+</li>
+</ul>
+<p><a href="../../diary/afterphilo.md">과제를 마치고</a></p>
+<p></p></article><hr><script src="https://utteranc.es/client.js" repo="scarf005/comments" issue-term="pathname" label="comment" theme="github-dark" crossorigin="anonymous" async=""></script></content></section><footer></footer><link rel="stylesheet" href="../../../fonts.css" type="text/css"></body></html>

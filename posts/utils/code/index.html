@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html><head><title>터미널에서 VS Code 써보기</title><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><link rel="stylesheet" href="../../../main.css" type="text/css"></head><body><header><a id="title" href="../../.."><h1>scarf@127.0.0.1</h1></a><nav><ul><li><a href="../../../about">About</a></li><li><a href="../..">Posts</a></li><li><a href="../../../tags">Tags</a></li></ul></nav><hr></header><section><content><article><h1><a href="">터미널에서 VS Code 써보기</a></h1><nav style="display:flex; height: 100%"><p>2022/01/23 21:35:54 Sun</p></nav><br><p></p><h2>사실 vscode는 터미널에서도 쓸 수 있대</h2>
+<p>어떻게? 터미널에서 <code>code</code>를 입력해서!</p>
+<h3>명령어가 없다고 뜨면</h3>
+<pre><code class="language-bash hljs">❯ <span class="hljs-built_in">which</span> code
+/usr/bin/code
+</code></pre>
+<p>가 되는지 확인하고 안 된다면 <code>PATH</code>에 vscode 경로 추가해주기</p>
+<h3>실행되자마자 아무 말 없이 꺼진다면</h3>
+<p><code>code --status</code>로 상황 확인하기, 저장할 디렉토리가 없어서 일어날 수도??</p>
+<h2>어떻게 쓸까</h2>
+<p><code>code [파일 목록]</code>: 새 vscode 창 열기. 없는 파일이면 새로 만들어 준다</p>
+<p><code>-s</code>: 기존 창에서 열기
+<code>-g &lt;파일&gt;:줄 수</code>: 파일을 열고 그 줄로 이동하기
+<code>-g &lt;파일&gt;:줄 수:열</code>: 그 다음에 그 열까지 이동하기
+<code>-a, --add &lt;디렉토리&gt;</code>: 디렉토리 만들기
+<code>-d, --diff &lt;파일&gt; &lt;파일&gt;</code>: 두 파일 차이 비교하기</p>
+<p><code>-</code>: 목록을 표준 입력에서 읽어오기 (예: 'ps aux | grep code | code -')</p>
+<p></p></article><hr><script src="https://utteranc.es/client.js" repo="scarf005/comments" issue-term="pathname" label="comment" theme="github-dark" crossorigin="anonymous" async=""></script></content></section><footer></footer><link rel="stylesheet" href="../../../fonts.css" type="text/css"></body></html>

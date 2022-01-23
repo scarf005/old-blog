@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html><head><title>phillosopher 과제를 마치고</title><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><link rel="stylesheet" href="../../../main.css" type="text/css"></head><body><header><a id="title" href="../../.."><h1>scarf@127.0.0.1</h1></a><nav><ul><li><a href="../../../about">About</a></li><li><a href="../..">Posts</a></li><li><a href="../../../tags">Tags</a></li></ul></nav><hr></header><section><content><article><h1><a href="">phillosopher 과제를 마치고</a></h1><nav style="display:flex; height: 100%"><p>2022/01/23 20:02:51 Sun</p></nav><br><p></p><p><a href="../../c/philo.md">과제</a></p>
+<h2>잘한 점</h2>
+<ul>
+<li>함수 분리를 열심히 했다</li>
+<li>300명에서도 계속 돌아갔다</li>
+</ul>
+<h2>부족했던 점</h2>
+<ul>
+<li>입력값 처리 관리가 미흡했다 (<code>INT_MAX</code>, <code>123e45</code>)</li>
+<li>오류가 자주 발생했다
+<ul>
+<li>수면 시간이 199일 때 안 돌아갔다</li>
+<li>1명일 때 포크를 바로 잡지 못했다</li>
+</ul>
+</li>
+<li>뮤텍스는 공용 자원을 경주 조건에서 보호하기 위해 쓰는 자물쇠인데 그거를 공용 자원같이 썼다
+<ul>
+<li>어차피 포크 사용 가능/불가 둘 중 하나라서 그대로 써도 될 것 같기는 한데...</li>
+</ul>
+</li>
+<li>놈 기준이 다시 변해서 주석을 쓸 수 없다 (으에엑)</li>
+</ul>
+<h2>더 잘 할 방법은?</h2>
+<ul>
+<li>테스터기를 찾을 수 없으면 직접 만들자
+<ul>
+<li>philosopher 같은 과제, 입력/출력값 확인할 방법 없을까?</li>
+<li>통과/오류를 어떻게 확인하지?</li>
+</ul>
+</li>
+<li>뮤텍스 작동 원리에 대해 좀 더 읽어보자</li>
+<li><a href="https://github.com/scarf005/hgen">hgen 패키지</a> 주석 생성을 선택할 수 있게 수정하기</li>
+<li>앞으로는 입력값에 좀 더 신경 쓰자</li>
+</ul>
+<p></p></article><hr><script src="https://utteranc.es/client.js" repo="scarf005/comments" issue-term="pathname" label="comment" theme="github-dark" crossorigin="anonymous" async=""></script></content></section><footer></footer><link rel="stylesheet" href="../../../fonts.css" type="text/css"></body></html>
