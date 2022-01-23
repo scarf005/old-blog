@@ -80,3 +80,5 @@ date: 2022-01-15 21:19:09 +09:00
   - sem_post
   - sem_wait
   - sem_unlink
+
+[과제를 마치고](/posts/diary/afterphilo.md)

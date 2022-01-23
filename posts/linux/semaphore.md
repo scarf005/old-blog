@@ -1,6 +1,7 @@
 ---
 title: semaphore가 뭔지 몰?루
 date: 2022-01-15 21:18:44 +09:00
+draft: true
 ---
 
 ## 참고자료
