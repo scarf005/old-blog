@@ -15,6 +15,7 @@ const site = lume({
 site
   .copy('CNAME')
   .copy('img')
+  .copy('favicon.ico')
   .ignore('README.md')
   .use(pug())
   .use(date())

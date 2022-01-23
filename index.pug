@@ -8,11 +8,4 @@ include /templates/previews.pug
 
 block contents
   p= site.description
-
-  ul
-    for post in search.pages("type=post", "date=desc")
-      +preview(post)
-      //- - var raw_date = `${post.data.date}`
-      //- include /templates/fdate_input.pug
-      //- p #{post.data.title} #{fdate}
-
+  +previewlist("type=post", "date=desc")

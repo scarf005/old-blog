@@ -1,15 +1,7 @@
----
-url: /tags/
----
-
 extends /layouts/main.pug
 include /templates/previews.pug
 
 block contents
-  h1= tag
-
-  ul
-    for post in search.pages(`${tag}`)
-        +preview(post)
-
+  h1 tagged #{tag}
+  +previewlist(tag)
   a(href="/tags/") all tags

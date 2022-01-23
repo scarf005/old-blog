@@ -1,9 +1,14 @@
-mixin tags(tags)
-  div(class="div inline")
-    ul
-      for tag in tags
-        li: a(class= 'tag', href= '/tag/' + tag.toLowerCase())
-          = tag
+//- mixin tags(tags)
+//-   div(class="div inline")
+//-     ul
+//-       for tag in tags
+//-         li: a(class= 'tag', href= '/' + tag.toLowerCase())
+//-           = tag
+
+mixin previewlist(which, ...more)
+  ul
+    for elem in search.pages(which, more)
+        +preview(elem)
 
 mixin preview(post)
   - var raw_date = `${post.data.date}`
